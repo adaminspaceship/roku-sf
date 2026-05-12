@@ -1,0 +1,290 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  cursor: none;
+}
+
+canvas {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+
+#entity-displays {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+  overflow: hidden;
+}
+.entity-display {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #060418;
+  color: #5cf3ff;
+  font-family: 'SF Mono', Menlo, monospace;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-shadow: 0 0 6px #5cf3ff, 0 0 14px rgba(92, 243, 255, 0.55);
+  border: 1px solid rgba(92, 243, 255, 0.45);
+  box-shadow:
+    0 0 8px rgba(92, 243, 255, 0.5),
+    inset 0 0 10px rgba(92, 243, 255, 0.18);
+  will-change: transform;
+  overflow: hidden;
+}
+
+#wheel-cal-panel {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  background: rgba(5, 2, 16, 0.94);
+  border: 2px solid #5cf3ff;
+  box-shadow: 0 0 14px rgba(92, 243, 255, 0.55);
+  color: #5cf3ff;
+  padding: 12px 16px;
+  font-family: 'SF Mono', Menlo, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 4px;
+  z-index: 20;
+  max-width: 380px;
+  text-shadow: 0 0 6px #5cf3ff;
+  pointer-events: none;
+}
+#wheel-cal-panel.hidden { display: none; }
+#wheel-cal-panel .cal-title { font-weight: 700; letter-spacing: 3px; font-size: 11px; margin-bottom: 8px; }
+#wheel-cal-panel .cal-help { color: #ffb0d8; font-size: 11px; text-shadow: 0 0 4px #ff2b8a; }
+#wheel-cal-panel .cal-help b { color: #fff; }
+#wheel-cal-values {
+  color: #ff6bb0;
+  margin: 10px 0 0;
+  font-size: 11px;
+  white-space: pre-wrap;
+  text-shadow: 0 0 4px #ff2b8a;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+#entity-cal-panel {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  background: rgba(5, 2, 16, 0.94);
+  border: 2px solid #ffe27a;
+  box-shadow: 0 0 14px rgba(255, 226, 122, 0.55);
+  color: #ffe27a;
+  padding: 12px 16px;
+  font-family: 'SF Mono', Menlo, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 4px;
+  z-index: 20;
+  max-width: 420px;
+  text-shadow: 0 0 6px rgba(255, 226, 122, 0.7);
+  pointer-events: none;
+}
+#entity-cal-panel.hidden { display: none; }
+#entity-cal-panel .cal-title { font-weight: 700; letter-spacing: 3px; font-size: 11px; margin-bottom: 8px; }
+#entity-cal-panel .cal-help { color: #ffb0d8; font-size: 11px; text-shadow: 0 0 4px #ff2b8a; }
+#entity-cal-panel .cal-help b { color: #fff; }
+#entity-cal-values {
+  color: #ff6bb0;
+  margin: 10px 0 0;
+  font-size: 11px;
+  white-space: pre-wrap;
+  text-shadow: 0 0 4px #ff2b8a;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+#building-overlays {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  overflow: hidden;
+}
+
+.building-logo-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #060418;
+  color: #5cf3ff;
+  font-family: 'SF Mono', Menlo, monospace;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-shadow: 0 0 6px #5cf3ff, 0 0 14px rgba(92, 243, 255, 0.55);
+  border: 1px solid rgba(92, 243, 255, 0.45);
+  box-shadow:
+    0 0 8px rgba(92, 243, 255, 0.5),
+    inset 0 0 10px rgba(92, 243, 255, 0.18);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  will-change: transform, opacity;
+  overflow: hidden;
+}
+.building-logo-overlay.is-active { opacity: 1; }
+
+#logo-cal-panel {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  background: rgba(5, 2, 16, 0.94);
+  border: 2px solid #ffe27a;
+  box-shadow: 0 0 14px rgba(255, 226, 122, 0.55);
+  color: #ffe27a;
+  padding: 12px 16px;
+  font-family: 'SF Mono', Menlo, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 4px;
+  z-index: 20;
+  max-width: 380px;
+  text-shadow: 0 0 6px rgba(255, 226, 122, 0.7);
+  pointer-events: none;
+}
+#logo-cal-panel.hidden { display: none; }
+#logo-cal-panel .cal-title { font-weight: 700; letter-spacing: 3px; font-size: 11px; margin-bottom: 8px; }
+#logo-cal-panel .cal-help { color: #ffb0d8; font-size: 11px; text-shadow: 0 0 4px #ff2b8a; }
+#logo-cal-panel .cal-help b { color: #fff; }
+#logo-cal-values {
+  color: #ff6bb0;
+  margin: 10px 0 0;
+  font-size: 11px;
+  white-space: pre-wrap;
+  text-shadow: 0 0 4px #ff2b8a;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+#billboards {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  overflow: hidden;
+}
+
+.billboard {
+  position: absolute;
+  bottom: 17%;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  will-change: transform;
+}
+
+.billboard-frame {
+  width: 240px;
+  padding: 16px 20px;
+  background: #06021a;
+  border: 4px solid #ff2b8a;
+  border-radius: 6px;
+  box-shadow:
+    0 0 14px rgba(255, 43, 138, 0.7),
+    0 0 36px rgba(255, 43, 138, 0.4),
+    inset 0 0 22px rgba(255, 43, 138, 0.18);
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+}
+
+.billboard-time {
+  font-size: 56px;
+  font-weight: 700;
+  color: #5cf3ff;
+  text-shadow:
+    0 0 8px #5cf3ff,
+    0 0 18px #5cf3ff,
+    0 0 32px rgba(92, 243, 255, 0.55);
+  letter-spacing: 3px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.billboard-date {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #ff6bb0;
+  text-shadow: 0 0 10px #ff2b8a;
+  letter-spacing: 5px;
+  font-weight: 600;
+}
+
+.billboard-brand {
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  line-height: 1;
+}
+
+.billboard-tagline {
+  margin-top: 10px;
+  font-size: 10px;
+  letter-spacing: 3px;
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+/* CURSOR — clean white-on-black */
+.billboard--cursor .billboard-frame {
+  background: #06060a;
+  border-color: #ffffff;
+  box-shadow:
+    0 0 10px rgba(255, 255, 255, 0.55),
+    0 0 26px rgba(255, 255, 255, 0.25),
+    inset 0 0 14px rgba(255, 255, 255, 0.08);
+}
+.billboard--cursor .billboard-brand {
+  color: #ffffff;
+  text-shadow: 0 0 6px #fff, 0 0 14px rgba(255, 255, 255, 0.6);
+}
+.billboard--cursor .billboard-tagline {
+  color: #d6d6d6;
+}
+
+/* ANTHROPIC — warm orange neon */
+.billboard--anthropic .billboard-frame {
+  background: #1a0a02;
+  border-color: #f0993d;
+  box-shadow:
+    0 0 12px rgba(240, 153, 61, 0.7),
+    0 0 32px rgba(240, 153, 61, 0.4),
+    inset 0 0 18px rgba(240, 153, 61, 0.18);
+}
+.billboard--anthropic .billboard-brand {
+  color: #ffd49a;
+  text-shadow:
+    0 0 8px #f0993d,
+    0 0 18px #f0993d,
+    0 0 32px rgba(240, 153, 61, 0.55);
+}
+.billboard--anthropic .billboard-tagline {
+  color: #f0993d;
+  text-shadow: 0 0 8px rgba(240, 153, 61, 0.6);
+}
+
+.billboard-post {
+  width: 8px;
+  height: 50px;
+  background: linear-gradient(180deg, #a0a0a0, #303030);
+  border-radius: 1px;
+  box-shadow: 0 0 3px rgba(255, 95, 184, 0.5);
+}

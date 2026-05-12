@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>City Screensaver</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="screen"></canvas>
+  <div id="building-overlays"></div>
+  <div id="entity-displays"></div>
+  <div id="wheel-cal-panel" class="hidden">
+    <div class="cal-title">WHEEL CALIBRATION</div>
+    <div class="cal-help">
+      Click + drag a wheel to move<br>
+      Scroll on a selected wheel to resize<br>
+      <b>D</b> exit · <b>C</b> copy values
+    </div>
+    <pre id="wheel-cal-values"></pre>
+  </div>
+  <div id="entity-cal-panel" class="hidden">
+    <div class="cal-title">ENTITY SCREEN TRACE</div>
+    <div class="cal-help">
+      Entities are paused at fixed positions.<br>
+      Drag inside one to define its screen rect · drag corner to resize · drag center to move<br>
+      <b>C</b> copy values · <b>E</b> exit
+    </div>
+    <pre id="entity-cal-values"></pre>
+  </div>
+  <div id="logo-cal-panel" class="hidden">
+    <div class="cal-title">LOGO TRACE MODE</div>
+    <div class="cal-help">
+      Drag on the skyline to draw a slot<br>
+      Click an existing slot to select · drag to move · drag corner to resize<br>
+      <b>Del</b> remove selected · <b>C</b> copy · <b>B</b> exit
+    </div>
+    <pre id="logo-cal-values"></pre>
+  </div>
+  <div id="billboards">
+    <div class="billboard billboard--clock">
+      <div class="billboard-frame">
+        <div class="billboard-time" id="bb-time">--:--</div>
+        <div class="billboard-date" id="bb-date">--- --- --</div>
+      </div>
+      <div class="billboard-post"></div>
+    </div>
+    <div class="billboard billboard--cursor">
+      <div class="billboard-frame">
+        <div class="billboard-brand">CURSOR</div>
+        <div class="billboard-tagline">EDIT AT THE SPEED OF THOUGHT</div>
+      </div>
+      <div class="billboard-post"></div>
+    </div>
+    <div class="billboard billboard--anthropic">
+      <div class="billboard-frame">
+        <div class="billboard-brand">ANTHROPIC</div>
+        <div class="billboard-tagline">CLAUDE 4.7 — NOW AVAILABLE</div>
+      </div>
+      <div class="billboard-post"></div>
+    </div>
+  </div>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
