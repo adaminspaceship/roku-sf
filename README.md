@@ -4,8 +4,7 @@ A browser-based screensaver inspired by [Roku City](https://en.wikipedia.org/wik
 
 Runs in any browser. No build step, no npm dependencies, no framework.
 
-![preview placeholder](docs/preview.png)
-<!-- Replace docs/preview.png with a real screenshot/gif. -->
+![preview](docs/preview.png)
 
 ## Run
 
